@@ -20,7 +20,7 @@ csv_output_path="s3n://%s/%s" % (bucket,prefix)
 postgres_server='data-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='Inventia2020!'
+password='XXXXX'
 
 join_sql_query="""
 select t1.title,
