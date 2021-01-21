@@ -1,11 +1,11 @@
+import psycopg2
+import boto3
 import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType,StructField, StringType, IntegerType
 from pyspark.sql.types import ArrayType, DoubleType, BooleanType
 import pyspark.sql.functions as f
-import psycopg2
 from smart_open import open as sopen
-import boto3
 
 bucket='data-emr-analytics'
 prefix='output/top_1000/'
@@ -101,7 +101,7 @@ def joinDataSet():
 	q.show(20,False)
 
 	# Write output to s3
-	q.repartition(1).write.option("sep","\t").format('csv').mode("overwrite").save(csv_output_path,header = 'false')
+	q.repartition(1).write.option("sep","\t").format('csv').save(csv_output_path,header = 'false')
 	
 
 
