@@ -1,4 +1,4 @@
-aws emr create-cluster --applications Name=Hadoop Name=Hive Name=Pig Name=Hue Name=Spark --ec2-attributes '{"KeyName":"ansible"
+aws emr create-cluster --applications Name=Hadoop Name=Hive Name=Hue Name=Spark --ec2-attributes '{"KeyName":"ansible"
 ,"InstanceProfile":"EMR_EC2_DefaultRole"
 ,"SubnetId":"subnet-fa244281"
 ,"EmrManagedSlaveSecurityGroup":"sg-0135b3df8d661d1d2"
@@ -12,24 +12,23 @@ aws emr create-cluster --applications Name=Hadoop Name=Hive Name=Pig Name=Hue Na
 ,"ActionOnFailure":"CONTINUE"
 ,"Jar":"command-runner.jar"
 ,"Properties":""
-,"Name":"Applicazione Spark"}]' --instance-groups '[{"InstanceCount":1
-,"EbsConfiguration":{"EbsBlockDeviceConfigs":[{"VolumeSpecification":{"SizeInGB":32
-,"VolumeType":"gp2"}
-,"VolumesPerInstance":2}]}
-,"InstanceGroupType":"MASTER"
-,"InstanceType":"m5.xlarge"
-,"Name":"Master - 1"}
-,{"InstanceCount":2
+,"Name":"Applicazione Spark"}]' --instance-groups '[{"InstanceCount":2
 ,"EbsConfiguration":{"EbsBlockDeviceConfigs":[{"VolumeSpecification":{"SizeInGB":32
 ,"VolumeType":"gp2"}
 ,"VolumesPerInstance":2}]}
 ,"InstanceGroupType":"CORE"
 ,"InstanceType":"m5.xlarge"
-,"Name":"Core (principale) - 2"}]' --configurations '[{"Classification":"spark-env"
+,"Name":"Core (principale) - 2"}
+,{"InstanceCount":1
+,"EbsConfiguration":{"EbsBlockDeviceConfigs":[{"VolumeSpecification":{"SizeInGB":32
+,"VolumeType":"gp2"}
+,"VolumesPerInstance":2}]}
+,"InstanceGroupType":"MASTER"
+,"InstanceType":"m5.xlarge"
+,"Name":"Master - 1"}]' --configurations '[{"Classification":"spark-env"
 ,"Properties":{}
 ,"Configurations":[{"Classification":"export"
 ,"Properties":{"PYSPARK_PYTHON":"/usr/bin/python3"}}]}
 ,{"Classification":"hive-site"
-,"Properties":{"hive.metastore.client.factory.class":"com.amazonaws.glue.catalog.metastore.AWSGlueDataCatalogHiveClientFactory"}}]' --auto-scaling-role EMR_AutoScaling_DefaultRole --bootstrap-actions '[{"Path":"s3://data-emr-analytics/bin/bootstrap.sh"
+,"Properties":{"hive.metastore.client.factory.class":"com.amazonaws.glue.catalog.metastore.AWSGlueDataCatalogHiveClientFactory"}}]' --auto-terminate --auto-scaling-role EMR_AutoScaling_DefaultRole --bootstrap-actions '[{"Path":"s3://data-emr-analytics/bin/bootstrap.sh"
 ,"Name":"Operazione personalizzata"}]' --ebs-root-volume-size 100 --service-role EMR_DefaultRole --enable-debugging --name 'spark-test' --scale-down-behavior TERMINATE_AT_TASK_COMPLETION --region eu-central-1
-
