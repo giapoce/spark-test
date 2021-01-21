@@ -68,7 +68,8 @@ def joinDataSet():
 
 	#Load xml
 	xml_df = spark.read.format('com.databricks.spark.xml'). \
-	option("rootTag", "feed").option("rowTag","doc"). \
+	option("rootTag", "feed"). \
+        option("rowTag","doc"). \
 	load(xml_s3_path). \
 	withColumn("shortUrl",f.split(f.col("url"),"/").getItem(4))
 
