@@ -134,6 +134,7 @@ def loadPostgres():
 				abstract text
 	)
 	""")
+	cur.execute("""DELETE FROM top1000""")
 	conn.commit()
 
 
