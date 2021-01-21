@@ -124,7 +124,7 @@ def loadPostgres():
 				budget float8,
 				year integer,
 				revenue float8,
-				vote_average float8,
+				popularity float8,
 				ratio float8,
 				companiesList text,
 				url text,
