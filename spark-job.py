@@ -139,8 +139,8 @@ def loadPostgres():
 
 def main():
  
-        joinDataSet()
-	loadPostgres()
+    joinDataSet()
+    loadPostgres()
 
 if __name__=='__main__':
   main()
