@@ -97,7 +97,7 @@ def joinDataSet():
 	q.show(20,False)
 
 	# Write output to s3
-	q.repartition(1).write.option("sep","\t").format('csv').save(csv_output_path,header = 'false')
+	q.repartition(1).write.option("sep","\t").format('csv').mode("overwrite").save(csv_output_path,header = 'false')
 	
 
 
@@ -118,9 +118,7 @@ def loadPostgres():
 	conn = psycopg2.connect(conn_string)
 	cur = conn.cursor()
 
-	cur.execute("""DROP TABLE top1000""")
-	conn.commit()
-	cur.execute("""CREATE TABLE top1000(
+	cur.execute("""CREATE TABLE IF NOT EXISTS top1000(
 				title text,
 				budget float8,
 				year integer,
