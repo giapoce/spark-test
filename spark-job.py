@@ -20,7 +20,7 @@ csv_output_path="s3n://%s/%s" % (bucket,prefix)
 postgres_server='data-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='XXXXX'
+password='Inventia2020!'
 
 join_sql_query="""
 select t1.title,
@@ -62,6 +62,7 @@ def get_s3_keys(bucket, prefix='', suffix=''):
 
     return keys
 
+
 #######################
 ###  SPARK          ###
 #######################
@@ -78,8 +79,6 @@ def joinDataSet():
 	withColumn("shortUrl",f.split(f.col("url"),"/").getItem(4))
 
 	selectedData = xml_df.select("url","abstract","shortUrl")
-	
-	selectedData.show(20,False)
 	selectedData.createOrReplaceTempView("wiki_pages")
 
 	#Load csv
@@ -93,15 +92,13 @@ def joinDataSet():
 	withColumn("companiesList",f.from_json(f.col("production_companies"),json_schema)). \
 	withColumn("companiesList",f.concat_ws("|",f.col("companiesList.name")))
 
-	df.show(20,False)
 	df.createOrReplaceTempView("movies_metadata")
 
 	# Join datasets
 	q=spark.sql(join_sql_query)
-	q.show(20,False)
 
 	# Write output to s3
-	q.repartition(1).write.option("sep","\t").format('csv').save(csv_output_path,header = 'false')
+	q.repartition(1).write.option("sep","\t").format('csv').mode("overwrite").save(csv_output_path,header = 'false')
 	
 
 
@@ -148,6 +145,7 @@ def main():
  
     joinDataSet()
     loadPostgres()
+
 
 if __name__=='__main__':
   main()
