@@ -62,6 +62,10 @@ def get_s3_keys(bucket, prefix='', suffix=''):
 
     return keys
 
+#######################
+###  SPARK          ###
+#######################
+
 def joinDataSet():
 
 	spark = SparkSession.builder.appName('csv_parse').getOrCreate()
