@@ -80,7 +80,10 @@ def joinDataSet():
 	#Load csv
 	json_schema = ArrayType(StructType([StructField('name', StringType(), nullable=False), StructField('id', IntegerType(), nullable=False)]))
 
-	df = spark.read.option("header",True).csv(csv_s3_path). \
+	df = spark.read.option("header",True). \
+	option("quote","\""). \
+	option("escape","\""). \
+	csv(csv_s3_path). \
 	withColumn("year",f.split(f.col("release_date"),"-").getItem(0)). \
 	withColumn("companiesList",f.from_json(f.col("production_companies"),json_schema)). \
 	withColumn("companiesList",f.concat_ws("|",f.col("companiesList.name")))
