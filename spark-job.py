@@ -78,7 +78,7 @@ def joinDataSet():
 	load(xml_s3_path). \
 	withColumn("shortUrl",f.split(f.col("url"),"/"))
 
-	selectedData = xml_df.select("url","abstract",f.element_at(col('shortUrl'), -1))
+	selectedData = xml_df.select("url","abstract",f.element_at(col('shortUrl'), -1).alias('shortUrl'))
 	selectedData.createOrReplaceTempView("wiki_pages")
 
 	#Load csv
