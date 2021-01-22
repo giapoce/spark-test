@@ -17,10 +17,10 @@ xml_s3_path="s3n://%s/xml/%s" % (bucket,wiki_xml_file)
 csv_s3_path="s3n://%s/csv/%s" % (bucket,movies_metadata)
 csv_output_path="s3n://%s/%s" % (bucket,prefix)
 
-postgres_server='data-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
+postgres_server='data-emr-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='XXXXX'
+password='XXXXXX'
 
 join_sql_query="""
 select t1.title,
@@ -78,7 +78,7 @@ def joinDataSet():
 	load(xml_s3_path). \
 	withColumn("shortUrl",f.split(f.col("url"),"/"))
 
-	selectedData = xml_df.select("url","abstract",f.element_at(col('shortUrl'), -1).alias('shortUrl'))
+	selectedData = xml_df.select("url","abstract",f.element_at(f.col('shortUrl'), -1).alias('shortUrl'))
 	selectedData.createOrReplaceTempView("wiki_pages")
 
 	#Load csv
