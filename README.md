@@ -1,9 +1,9 @@
 # A simple ETL using Spark on EMR ( AWS )
 
-To implement this ETL I chose a number of AWS managed services such as: \
+To implement this ETL I chose a number of AWS managed services such as: 
 
-* **EMR** ( a managed Hadoop installation) \
-* **RDS** ( a managed relational database service ) \
+* **EMR** ( a managed Hadoop installation) 
+* **RDS** ( a managed relational database service ) 
 * **S3**  ( an object storage ) 
 
 
