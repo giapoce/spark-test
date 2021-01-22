@@ -20,7 +20,7 @@ csv_output_path="s3n://%s/%s" % (bucket,prefix)
 postgres_server='data-emr-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='XXXXXX'
+password='XXXXX'
 
 join_sql_query="""
 select t1.title,
@@ -32,7 +32,9 @@ t1.budget/t1.revenue as ratio,
 t1.companiesList,
 t2.url,
 t2.abstract 
-from movies_metadata t1 inner join wiki_pages t2 on replace(t1.title,' ','_')=t2.shortUrl 
+from movies_metadata t1 inner join wiki_pages t2 
+on t1.title=t2.title
+and replace(t1.title,' ','_')=t2.shortUrl
 where round(t1.budget/t1.revenue)>0 
 order by 4 desc nulls last 
 limit 1000
@@ -76,9 +78,10 @@ def joinDataSet():
 	option("rootTag", "feed"). \
         option("rowTag","doc"). \
 	load(xml_s3_path). \
+        withColumn("title",f.ltrim(f.split(f.col("title"),":").getItem(1))). \
 	withColumn("shortUrl",f.split(f.col("url"),"/"))
 
-	selectedData = xml_df.select("url","abstract",f.element_at(f.col('shortUrl'), -1).alias('shortUrl'))
+	selectedData = xml_df.select("url","abstract","title",f.element_at(f.col('shortUrl'), -1).alias('shortUrl'))
 	selectedData.createOrReplaceTempView("wiki_pages")
 
 	#Load csv
