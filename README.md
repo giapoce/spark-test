@@ -24,6 +24,7 @@ but in a production enviroment more stricted permissions should be granted
 
 ```
 
+## Install and configure AWS CLI
 After installing the AWS CLI, 
 configure it to use your credentials.\
 To install AWS CLI, please refer to https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
