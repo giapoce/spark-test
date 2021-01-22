@@ -1,11 +1,11 @@
-### A simple ETL using Spark on EMR ( AWS )
+# A simple ETL using Spark on EMR ( AWS )
 
 
 
-# Create a IAM user using AWS console: 
+## Create a IAM user using AWS console: 
 https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
 
-# Assign AWS user all necessary permission
+## Assign AWS user all necessary permission
 As this is just a demo you can assign full access role for: **EMR**,**RDS** and **S3** services \
 but in a production enviroment more stricted permissions should be granted
 
@@ -31,7 +31,7 @@ Default output format [None]: json
 ```
 
 
-# Create an s3 bucket and upload all necessary files to it
+## Create an s3 bucket and upload all necessary files to it
 
 ```shell
 
@@ -45,7 +45,7 @@ e) aws s3 cp spark-job.py s3://data-emr-analytics/bin/
 ```
 
 
-# Create a postgres rds 
+## Create a postgres rds 
 
 ```shell
 
@@ -63,7 +63,7 @@ aws rds create-db-instance
     --port 5432
 ```
 
-# Launch  a transient emr cluster
+## Launch  a transient emr cluster
 
 ```shell
 
@@ -127,7 +127,7 @@ postgres=>select * from top1000 limit 10;
  The Thin Red Line | 52000000 | 1998 | 98126565 |   9.783966 |  0.529927853889515 | Fox 2000 Pictures-Phoenix Pictures-Geisler-Roberdeau                                                                                           | https://en.wikipedia.org/wiki/The_Thin_Red_Line    | The Thin Red Line may refer to:
 ```
 
-# Notes on some technical choices
+## Notes on some technical choices
 
 To correctly parse the movies_metadata file I had to enable the quote escaping option,\
 as some records in the file had fields with commas inside that would cause parsing errors. 
