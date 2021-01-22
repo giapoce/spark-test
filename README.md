@@ -1,9 +1,15 @@
 # A simple ETL using Spark on EMR ( AWS )
 
+To implement this ETL I chose a number of AWS managed services such as: \
+
+** EMR ** ( a managed Hadoop installation) \
+** RDS ** ( a managed relational database service ) \
+** S3 **  ( an object storage ) 
 
 
 ## Create a IAM user using AWS console: 
 https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
+
 
 ## Assign AWS user all necessary permission
 As this is just a demo you can assign full access role for: **EMR**,**RDS** and **S3** services \
