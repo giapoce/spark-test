@@ -1,5 +1,19 @@
 # A simple ETL using Spark on EMR ( AWS )
 
+# Create a IAM user using AWS console: https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
+
+# Assign  user all necessary permission
+As this is just a demo you can assign full access role for:\
+EMR,RDS and S3 services but in a production enviroment more stricted \
+permissions should be granted
+
+```shell
+ AmazonRDSFullAccess
+ AmazonS3FullAccess
+ AmazonElasticMapReduceFullAccess
+
+```
+
 After installing the AWS CLI, 
 configure it to use your credentials.\
 To install AWS CLI, please refer to https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
@@ -14,17 +28,6 @@ Default output format [None]: json
 
 ```
 
-# Assign aws user all necessary permission
-As this is just a demo you can assign full access role for:\
-EMR,RDS and S3 services but in a production enviroment more stricted \
-permissions should be granted
-
-```shell
- AmazonRDSFullAccess
- AmazonS3FullAccess
- AmazonElasticMapReduceFullAccess
-
-```
 
 # Create an s3 bucket and upload all necessary files to it
 
@@ -58,7 +61,7 @@ aws rds create-db-instance
     --port 5432
 ```
 
-# Launch emr cluster
+# Launch  a transient emr cluster
 
 ```shell
 
@@ -100,7 +103,7 @@ aws emr create-cluster --applications Name=Hadoop Name=Hive Name=Hue Name=Spark 
 ```
 
 
-## Connect to postgres database and check that data have been loaded
+## Connect to the postgres database and check that data have been loaded
 
 
 ```shell
@@ -122,5 +125,12 @@ postgres=>select * from top1000 limit 10;
  The Thin Red Line | 52000000 | 1998 | 98126565 |   9.783966 |  0.529927853889515 | Fox 2000 Pictures-Phoenix Pictures-Geisler-Roberdeau                                                                                           | https://en.wikipedia.org/wiki/The_Thin_Red_Line    | The Thin Red Line may refer to:
 ```
 
-
-
+# Notes on some technical choices
+To correctly parse the movies_metadata file I had to enable the quote escaping option,\
+as some records in the file had fields with commas inside that would cause parsing errors. \
+To avoid parsing issues during the loading phase to postgres, \
+I chose to rewrite the output csv file using a tab as a field separator. \
+To load the xml file I used a databricks library: com.databricks.xml. \
+The join between the wikipedia and the movies_metadata file was made using the title field from \
+movies_metadata ( which had to be sanitized, replacing all blank spaces with an underscore ) \
+and the url last part from wikipedia file
