@@ -1,6 +1,7 @@
 # A simple ETL using Spark on EMR ( AWS )
 
-After installing the AWS CLI. Configure it to use your credentials.
+After installing the AWS CLI, 
+configure it to use your credentials.
 To install AWS CLI, please refer to https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
 
 ```shell
@@ -93,7 +94,7 @@ aws emr create-cluster --applications Name=Hadoop Name=Hive Name=Hue Name=Spark 
 ```shell
 psql -h data-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com -U postgres -d postgres
 
-postgre>select * from top1000 limit 10;
+postgres=>select * from top1000 limit 10;
 
        title       |  budget  | year | revenue  | popularity |       ratio        |                                                                 companieslist                                                                  |                        url                         |                                                                                                                                                                                        abstract                                           
 -------------------+----------+------+----------+------------+--------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
