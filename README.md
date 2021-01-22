@@ -1,8 +1,9 @@
 # A simple ETL using Spark on EMR ( AWS )
 
-# Create a IAM user using AWS console: https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
+# Create a IAM user using AWS console: 
+https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
 
-# Assign  user all necessary permission
+# Assign AWS user all necessary permission
 As this is just a demo you can assign full access role for:\
 EMR,RDS and S3 services but in a production enviroment more stricted \
 permissions should be granted
@@ -136,5 +137,5 @@ I chose to rewrite the output csv file using a tab as a field separator.
 To load the xml file I used a databricks library: com.databricks.xml. 
 
 The join between the wikipedia and the movies_metadata files was made using the title field from \
-movies_metadata ( which had to be sanitized, replacing all blank spaces with an underscore ) \
-and the url last part from wikipedia file.
+movies_metadata file ( which had to be sanitized, replacing all blank spaces with an underscore ) \
+and the last part of url field from wikipedia file.
