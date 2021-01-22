@@ -16,14 +16,12 @@ Default output format [None]: json
 
 # Assign aws user all necessary permission
 As this is just a demo you can assign full access role for:\
-EMR,rds and s3 services.\
-but in a production enviroment more stricted permissions should be granted
+EMR,RDS and S3 services but in a production enviroment more stricted \
+permissions should be granted
 
 ```shell
  AmazonRDSFullAccess
-
  AmazonS3FullAccess
-
  AmazonElasticMapReduceFullAccess
 
 ```
