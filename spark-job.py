@@ -20,7 +20,7 @@ csv_output_path="s3n://%s/%s" % (bucket,prefix)
 postgres_server='data-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='XXXXX'
+password='XXXXXX'
 
 join_sql_query="""
 select t1.title,
@@ -90,7 +90,7 @@ def joinDataSet():
 	csv(csv_s3_path). \
 	withColumn("year",f.split(f.col("release_date"),"-").getItem(0)). \
 	withColumn("companiesList",f.from_json(f.col("production_companies"),json_schema)). \
-	withColumn("companiesList",f.concat_ws("|",f.col("companiesList.name")))
+	withColumn("companiesList",f.concat_ws("-",f.col("companiesList.name")))
 
 	df.createOrReplaceTempView("movies_metadata")
 
