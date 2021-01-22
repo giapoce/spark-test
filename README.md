@@ -1,4 +1,4 @@
-# A simple ETL using Spark on EMR ( AWS )
+### A simple ETL using Spark on EMR ( AWS )
 
 
 
@@ -6,9 +6,8 @@
 https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
 
 # Assign AWS user all necessary permission
-As this is just a demo you can assign full access role for:\
-EMR,RDS and S3 services but in a production enviroment more stricted \
-permissions should be granted
+As this is just a demo you can assign full access role for: **EMR**,**RDS** and **S3** services \
+but in a production enviroment more stricted permissions should be granted
 
 ```shell
  AmazonRDSFullAccess
