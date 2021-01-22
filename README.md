@@ -146,7 +146,3 @@ To avoid parsing issues during the loading phase to postgres, \
 I chose to rewrite the output csv file using a tab as a field separator. 
 
 To load the xml file I used a databricks library: com.databricks.xml. 
-
-The join between the wikipedia and the movies_metadata files was made using the title field from \
-movies_metadata file ( which had to be sanitized, replacing all blank spaces with an underscore ) \
-and the last part of url field from wikipedia file.
