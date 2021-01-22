@@ -14,6 +14,21 @@ Default output format [None]: json
 
 ```
 
+# Assign aws user all necessary permission\
+As this is just a demo you can assign full access role for:\
+EMR,rds and s3 services.\
+but in a production enviroment more stricted permissions should be granted
+
+```shell
+
+$ aws configure
+AWS Access Key ID [None]: <YOUR_AWS_ACCESS_KEY_ID>
+AWS Secret Access Key [None]: <YOUR_AWS_SECRET_ACCESS_KEY>
+Default region name [None]: <YOUR_AWS_REGION>
+Default output format [None]: json
+
+```
+
 # Create an s3 bucket and upload all necessary files to it
 
 ```shell

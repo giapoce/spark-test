@@ -1,3 +1,5 @@
+#!/bin/bash
+
 aws emr create-cluster --applications Name=Hadoop Name=Hive Name=Hue Name=Spark --ec2-attributes '{"KeyName":"ansible"
 ,"InstanceProfile":"EMR_EC2_DefaultRole"
 ,"SubnetId":"subnet-fa244281"
