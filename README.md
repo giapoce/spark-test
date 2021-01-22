@@ -6,6 +6,8 @@ To implement this ETL I chose a number of AWS managed services such as:
 * **RDS** ( a managed relational database service ) 
 * **S3**  ( an object storage ) 
 
+Here are all necessary steps:
+
 
 ## Create a IAM user using AWS console: 
 https://console.aws.amazon.com/iam/home?region=eu-central-1#/users
