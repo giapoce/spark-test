@@ -128,12 +128,12 @@ postgres=>select * from top1000 limit 10;
 # Notes on some technical choices
 
 To correctly parse the movies_metadata file I had to enable the quote escaping option,\
-as some records in the file had fields with commas inside that would cause parsing errors. \
+as some records in the file had fields with commas inside that would cause parsing errors. 
 
 To avoid parsing issues during the loading phase to postgres, \
-I chose to rewrite the output csv file using a tab as a field separator. \
+I chose to rewrite the output csv file using a tab as a field separator. 
 
-To load the xml file I used a databricks library: com.databricks.xml. \
+To load the xml file I used a databricks library: com.databricks.xml. 
 
 The join between the wikipedia and the movies_metadata files was made using the title field from \
 movies_metadata ( which had to be sanitized, replacing all blank spaces with an underscore ) \
