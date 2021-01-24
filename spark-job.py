@@ -33,11 +33,9 @@ t1.companiesList,
 t2.url,
 t2.abstract 
 from movies_metadata t1 inner join wiki_pages t2 
-on t1.title=t2.title
-and replace(t1.title,' ','_')=t2.shortUrl
+on replace(t1.title,' ','_')=t2.shortUrl
 where round(t1.budget/t1.revenue)>0 
 order by 4 desc nulls last 
-limit 1000
 """
 
 def get_s3_keys(bucket, prefix='', suffix=''):
@@ -90,6 +88,7 @@ def joinDataSet():
 	df = spark.read.option("header",True). \
 	option("quote","\""). \
 	option("escape","\""). \
+	option("multiLine",True). \
 	csv(csv_s3_path). \
 	withColumn("year",f.split(f.col("release_date"),"-").getItem(0)). \
 	withColumn("companiesList",f.from_json(f.col("production_companies"),json_schema)). \
