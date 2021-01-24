@@ -33,7 +33,8 @@ t1.companiesList,
 t2.url,
 t2.abstract 
 from movies_metadata t1 inner join wiki_pages t2 
-on replace(t1.title,' ','_')=t2.shortUrl
+on t1.title=t2.title
+and replace(t1.title,' ','_')=t2.shortUrl
 where round(t1.budget/t1.revenue)>0 
 order by 4 desc nulls last 
 """
