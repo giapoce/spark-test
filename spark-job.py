@@ -9,6 +9,8 @@ from smart_open import open as sopen
 
 bucket='data-emr-analytics'
 prefix='output/top_1000/'
+prefix2='output/wiki/'
+prefix3='output/movies/'
 
 wiki_xml_file='enwiki-latest-abstract.xml'
 movies_metadata='movies_metadata.csv'
@@ -16,11 +18,13 @@ movies_metadata='movies_metadata.csv'
 xml_s3_path="s3n://%s/xml/%s" % (bucket,wiki_xml_file)
 csv_s3_path="s3n://%s/csv/%s" % (bucket,movies_metadata)
 csv_output_path="s3n://%s/%s" % (bucket,prefix)
+csv_output_path_2="s3n://%s/%s" % (bucket,prefix2)
+csv_output_path_3="s3n://%s/%s" % (bucket,prefix3)
 
 postgres_server='data-emr-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='XXXXXX'
+password='XXXXX'
 
 join_sql_query="""
 select t1.title,
@@ -34,7 +38,7 @@ t2.url,
 t2.abstract 
 from movies_metadata t1 inner join wiki_pages t2 
 on t1.title=t2.title
-and replace(t1.title,' ','_')=t2.shortUrl
+and t1.sanitizedTitle=t2.shortUrl
 where round(t1.budget/t1.revenue)>0 
 order by 4 desc nulls last 
 limit 1000
@@ -81,7 +85,8 @@ def joinDataSet():
         withColumn("title",f.ltrim(f.split(f.col("title"),":").getItem(1))). \
 	withColumn("shortUrl",f.split(f.col("url"),"/"))
 
-	selectedData = xml_df.select("url","abstract","title",f.element_at(f.col('shortUrl'), -1).alias('shortUrl'))
+	selectedData = xml_df.select("title","url",f.element_at(f.col('shortUrl'), -1).alias('shortUrl'),"abstract")
+	selectedData.repartition(1).write.option("sep","\t").format('csv').mode("overwrite").save(csv_output_path_2,header = 'false')
 	selectedData.createOrReplaceTempView("wiki_pages")
 
 	#Load csv
@@ -92,9 +97,13 @@ def joinDataSet():
 	option("escape","\""). \
 	option("multiLine",True). \
 	csv(csv_s3_path). \
+	withColumn("sanitizedTitle",f.regexp_replace(f.col("title"),"\\s+","_")). \
 	withColumn("year",f.split(f.col("release_date"),"-").getItem(0)). \
 	withColumn("companiesList",f.from_json(f.col("production_companies"),json_schema)). \
 	withColumn("companiesList",f.concat_ws("-",f.col("companiesList.name")))
+
+	csvSelectedData=df.select("title","sanitizedTitle")
+	csvSelectedData.repartition(1).write.option("sep","\t").format('csv').mode("overwrite").save(csv_output_path_3,header = 'false')
 
 	df.createOrReplaceTempView("movies_metadata")
 

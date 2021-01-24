@@ -120,10 +120,8 @@ aws emr create-cluster --applications Name=Hadoop Name=Hive Name=Hue Name=Spark 
 ```shell
 psql -h data-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com -U postgres -d postgres
 
-postgres=>select * from top1000 limit 9;
+postgres=>select * from top1000 limit 10;
 
-       title       |  budget  | year | revenue  | popularity |       ratio        |                                                                 companieslist                                                                  |                       url                       |                                                                                                                                                                                        abstract                                              
--------------------+----------+------+----------+------------+--------------------+------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  Hellboy           | 66000000 | 2004 | 99318987 |  13.206854 | 0.6645255050778961 | Columbia Pictures-Revolution Studios-Dark Horse Entertainment-Lawrence Gordon Productions-Starlite Films                                       | https://en.wikipedia.org/wiki/Hellboy           | | creators       = Mike Mignola
  Whatever It Takes | 15000000 | 2000 |  9902115 |   3.550711 | 1.5148278928289562 | Columbia Pictures Corporation                                                                                                                  | https://en.wikipedia.org/wiki/Whatever_It_Takes | Whatever It Takes may refer to:
  Very Bad Things   | 30000000 | 1998 |  9898412 |  10.432293 | 3.0307891811332968 | Initial Entertainment Group (IEG)-Interscope Communications-VBT Productions-Ballpark Productions Partnership                                   | https://en.wikipedia.org/wiki/Very_Bad_Things   | | writer     = Peter Berg
@@ -133,6 +131,8 @@ postgres=>select * from top1000 limit 9;
  Evolution         | 80000000 | 2001 | 98376292 |   5.395127 | 0.8132040593682877 | DreamWorks SKG-Columbia Pictures Corporation-Montecito Picture Company, The                                                                    | https://en.wikipedia.org/wiki/Evolution         | Evolution is change in the heritable characteristics of biological populations over successive generations. These characteristics are the expressions of genes that are passed on from parent to offspring during reproduction.
  Killers           | 75000000 | 2010 | 98159963 |   6.540621 | 0.7640589677076386 | Katalyst Films-Lionsgate-Aversano Films                                                                                                        | https://en.wikipedia.org/wiki/Killers           | Killers or The Killers may refer to:
  The Thin Red Line | 52000000 | 1998 | 98126565 |   9.783966 |  0.529927853889515 | Fox 2000 Pictures-Phoenix Pictures-Geisler-Roberdeau                                                                                           | https://en.wikipedia.org/wiki/The_Thin_Red_Line | The Thin Red Line may refer to:
+ Faithful          | 13000000 | 1996 |  9789900 |   1.296862 | 1.3278991613806066 | New Line Cinema-Miramax Films                                                                                                                  | https://en.wikipedia.org/wiki/Faithful          | Faithful may refer to:
+
 (10 rows)
 
 ```
