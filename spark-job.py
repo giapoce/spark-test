@@ -20,7 +20,7 @@ csv_output_path="s3n://%s/%s" % (bucket,prefix)
 postgres_server='data-emr-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='XXXXX'
+password='XXXXXX'
 
 join_sql_query="""
 select t1.title,
@@ -37,6 +37,7 @@ on t1.title=t2.title
 and replace(t1.title,' ','_')=t2.shortUrl
 where round(t1.budget/t1.revenue)>0 
 order by 4 desc nulls last 
+limit 1000
 """
 
 def get_s3_keys(bucket, prefix='', suffix=''):
