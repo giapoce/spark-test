@@ -38,6 +38,7 @@ t2.url,
 t2.abstract 
 from movies_metadata t1 inner join wiki_pages t2 
 on t1.title=t2.title
+and t1.sanitizedTitle=t2.shortUrl
 where round(t1.budget/t1.revenue)>0 
 order by 6 desc nulls last 
 limit 1000
