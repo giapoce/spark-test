@@ -24,7 +24,7 @@ csv_output_path_3="s3n://%s/%s" % (bucket,prefix3)
 postgres_server='data-emr-analytics.cvilmwwj2hq5.eu-central-1.rds.amazonaws.com'
 dbname='postgres'
 dbuser='postgres'
-password='XXXXX'
+password='XXXXXX'
 
 join_sql_query="""
 select t1.title,
@@ -38,10 +38,8 @@ t2.url,
 t2.abstract 
 from movies_metadata t1 inner join wiki_pages t2 
 on t1.title=t2.title
-and t1.sanitizedTitle=t2.shortUrl
 where round(t1.budget/t1.revenue)>0 
-order by 4 desc nulls last 
-limit 1000
+order by 6 desc nulls last 
 """
 
 def get_s3_keys(bucket, prefix='', suffix=''):
